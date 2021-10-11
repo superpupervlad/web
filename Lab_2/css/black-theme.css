@@ -1,0 +1,67 @@
+* {
+  color: #bec0be;
+  font-family: Montserrat, Helvetica, sans-serif;
+}
+
+a {
+  color: #84b6e8;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #f0c674;
+  font-family: Code Pro Light, monospace;
+}
+
+h2 {
+  margin-bottom: 0.15em;
+}
+
+#me h2 {
+  color: #c784e8;
+}
+
+#hard-skills h2 {
+  color: #e88186;
+}
+
+#soft-skills h2 {
+  color: #84dee8;
+}
+
+pre,
+code {
+  color: #ffffff;
+  font-family: Hack, monospace;
+  text-align: center;
+}
+
+img {
+  float: right;
+  box-shadow: 0 0 15px 5px #ffffff;
+  max-width: 200px;
+}
+
+body {
+  background-color: #252525;
+  padding: 15px;
+  margin: auto;
+  max-width: min(60%, 700px);
+}
+
+header {
+  margin-bottom: 7px;
+}
+
+footer {
+  margin-top: 40px;
+}
+
+ul {
+  margin-top: 0.15em;
+}
+
