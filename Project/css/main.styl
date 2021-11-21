@@ -1,3 +1,7 @@
+.default_stroke
+  border 1px solid black
+  border-radius 5px
+
 body
   font-family 'Roboto', sans-serif
   font-weight 100
@@ -9,12 +13,13 @@ header
   top 0
   height 80px
   background white
+  z-index 100
 
 header a
   text-decoration none
   text-align center
   color black
-  font-size 36px
+  font-size 2em
   display inline
 
 header nav
@@ -28,11 +33,18 @@ header nav
 header input
   width 16%
   height 40px
-  font-size 24px
+  font-size 1.5em
   font-family 'Roboto'
   font-weight 300
-  border 1px solid #000000
-  border-radius 5px
+  @extend .default_stroke
+
+h1
+  display block
+  font-size 5em
+  margin-top 40px
+  margin-bottom 100px
+  text-align center
+  font-weight 100
 
 footer
   height 100px
@@ -41,16 +53,34 @@ footer
 footer img
   height 100%
 
+div
+  display flex
+  flex-wrap nowrap
+  text-align center
+
+strong
+  font-weight 100
+
+th
+  font-weight 100
+  padding-top 10px
+
+table
+  margin-bottom 15px
+
+.stroked-function
+  border 3px dashed #84b6e8
+
 .logo
   margin-left 10px
   height 100%
 
 .center
-  margin-left: auto
-  margin-right: auto
-  margin-bottom: 200px
-  margin-top: 200px
-  display: block
+  margin-left auto
+  margin-right auto
+  margin-bottom 200px
+  margin-top 200px
+  display block
 
 .left-side
   margin-right 20px
@@ -62,6 +92,106 @@ footer img
   @extend .right-side
   margin-left auto
 
+.item
+  flex-direction column
+  flex-basis 100%
+
+.item_picture
+  margin 5px auto 0 auto
+  height 70%
+  width 100%
+
+.item_image
+  border-radius 5px
+  object-fit cover
+  height 100%
+  width 40%
+  //width 275px
+  //height 165px
+
+.item_title
+  font-size 3em
+
+.comapare_section_block
+  justify-content space-between
+  margin 30px
+
+.compare_items_block
+  flex-shrink 9
+  flex-direction column
+  margin-right 70px
+
+.compared_items
+  max-height 200px
+  align-items stretch
+  border-radius 0
+  z-index 50
+  position sticky
+  background white
+  top 80px
+  justify-content space-between
+  display flex
+
+.compared_values
+  justify-content center
+  flex-direction column
+  margin-top 40px
+  @extend .default_stroke
+  position sticky // TODO
+  top 400px
+
+.values_group
+  flex-direction column
+  width 100%
+  border-top 1px solid black
+  border-radius 0
+
+.values_group:first-child
+  border-top 0
+
+.values_title
+  position sticky
+  font-size 3em
+  border-bottom 1px solid black
+  border-radius 0
+  background white
+  top 250px
+
+.menu_items
+  flex-shrink 2
+  position sticky
+  align-self flex-start
+  top 80px
+  flex-direction column
+  overflow-y scroll
+  height calc(100vh - 80px)
+  @extend .default_stroke
+
+.menu_item
+  justify-content flex-start
+  padding-right 5px
+  border-radius 0
+
+.menu_item:hover
+  background #EEEEEE
+
+.menu_image
+  object-fit cover
+  height 32px
+  width 72px
+  margin 16px auto 16px 12px
+  border-radius 3px
+
+.menu_item_name
+  font-size 1.5em
+  display block
+  margin auto 40px auto 40px //TODO respect scrollbar
+  flex-basis 100%
+
 @media screen and (max-width: 900px)
   header input
     width 150px
+
+@media screen and (min-width: 1600px)
+  header input
+    width 250px
