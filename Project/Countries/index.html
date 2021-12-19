@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Comparison of countries">
+    <meta name="keywords" content="comparison, compare, comparator">
+    <meta name="author" content="Vladislav Yurchenko">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="js/render.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/change_elements.js"></script>
+    <script type="text/javascript" src="js/load.js"></script>
+    <script type="text/javascript" src="js/other.js"></script>
+    <title>Countries</title>
+    <!--Google fonts-->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+    </style>
+    <!--JS global variables-->
+    <script>
+      (function() {
+        window.columns = []
+        window.pass_to_template = {}
+        window.menu_items = []
+        window.available_subgroups = ['Common information', 'Politics', 'Codes', 'Other']
+        window.available_values = {
+          'Common information': [
+            'Official name',
+            'Capital',
+            'Region',
+            'Area',
+            'Population',
+          ],
+          'Politics': [
+            'UN member',
+            'Independent',
+            'Status',
+          ],
+          'Codes': [
+            'cca2',
+            'ccn3',
+            'cca3',
+            'cioc',
+          ],
+          'Other': [
+            'First day of week',
+          ]
+        }
+        start()
+      })()
+    </script>
+    <!--Handlebars templates-->
+    <script id="values_group_template" type="text/x-handlebars-template">
+        {{#each as as |subgroup|}}
+          <div class="values_subgroup_title">+ {{subgroup}}</div>
+          <div class="values_subgroup">
+            <div class="values_title_values">
+              {{#each (lookup ../av subgroup) as |value_title|}}
+                <div class="values_title">
+                  {{value_title}}
+                </div>
+                <div class="values_values">
+                  {{#each ../../cc as |element|}}
+                    <div class="single_value">
+                      {{lookup (lookup element.data subgroup) value_title}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+    </script>
+    <script id="compared_items_template" type="text/x-handlebars-template">
+        {{#each cc}}
+          <div class="item">
+            <picture class="item_picture" onclick="delete_element('{{this.id}}')">
+              <img class="item_image" src="{{this.img}}">
+            </picture>
+            <strong class="item_title">{{this.name}}</strong>
+          </div>
+        {{/each}}
+    </script>
+    <script id="menu_items_template" type="text/x-handlebars-template">
+        {{#each menu_items}}
+          {{#unless this.hidden}}
+            <div class="menu_item" onclick="append_element('{{this.id}}')">
+              <picture>
+                <img class="menu_image" src="{{this.img}}">
+              </picture>
+              <div class="menu_item_name">{{this.name}}</div>
+            </div>
+          {{/unless}}
+        {{/each}}
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="left-side logo" href="index.html"><img src="images/header.png" alt="logo" width="80" height="80"></a>
+
+        <a class="first-right-element right-side" href="about.html">about</a>
+      </nav>
+    </header>
+    <main>
+      <h1>countries comparison</h1>
+      <input type="checkbox" id="save_checkbox" onchange="process_checkbox()"> Save
+      <div class="compare_section_block">
+        <div class="compare_items_block">
+          <div id="compared_items_output" class="compared_items"></div>
+          <div class="compared_values">
+            <div id="values_group_output" class="values_group"></div>
+          </div>
+        </div>
+        <div id="menu_items_output" class="menu_items"></div>
+      </div>
+    </main>
+  </body>
+</html>
+
