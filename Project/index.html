@@ -6,12 +6,66 @@
     <meta name="keywords" content="cats, cat, comparison, compare, comparator">
     <meta name="author" content="Vladislav Yurchenko">
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="js/cats_data.js"></script>
+    <script type="text/javascript" src="js/cats_render.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <title>Cats comparing</title>
     <!--Google fonts-->
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
     </style>
+    <!--Handlebars templates-->
+    <script id="values_group_template" type="text/x-handlebars-template">
+        {{#each as as |subgroup|}}
+          <div class="values_subgroup_title">+ {{subgroup}}</div>
+          <div class="values_subgroup">
+            <div class="values_title_values">
+              {{#each (lookup ../av subgroup) as |value_title|}}
+                <div class="values_title">
+                  {{value_title}}
+                </div>
+                <div class="values_values">
+                  {{#each ../../cc as |element|}}
+                    <div class="single_value">
+                      {{lookup (lookup element.data subgroup) value_title}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+    </script>
+    <script id="compared_items_template" type="text/x-handlebars-template">
+        {{#each cc}}
+          <div class="item">
+            <picture class="item_picture" onclick="delete_element({{this.id}})">
+              <img class="item_image" src="images/{{this.img}}">
+            </picture>
+            <strong class="item_title">{{this.name}}</strong>
+          </div>
+        {{/each}}
+    </script>
+    <script id="menu_items_template" type="text/x-handlebars-template">
+        {{#each menu_items}}
+          {{#unless this.hidden}}
+            <div class="menu_item" onclick="append_element({{@index}})">
+              <picture>
+                <img class="menu_image" src="images/{{this.img}}">
+              </picture>
+              <div class="menu_item_name">{{this.name}}</div>
+            </div>
+          {{/unless}}
+        {{/each}}
+    </script>
+    <script>
+      (function() {
+        window.columns = []
+        window.pass_to_template = {}
+        window.menu_items = {}
+      })()
+    </script>
   </head>
   <body>
     <header>
@@ -28,215 +82,15 @@
 <!--      <img class="center" src="images/under_construction.jpg" alt="under_construction" height="500px">-->
       <h1>cats comparison</h1>
       <button onclick="toggleClass('div', 'stroked-function');">Divs stroke</button>
-      <div class="comapare_section_block">
+      <button onclick="render_template(true)">Render cats</button>
+      <div class="compare_section_block">
         <div class="compare_items_block">
-          <div class="compared_items">
-            <div class="item">
-              <picture class="item_picture">
-                <img class="item_image" src="images/sphynx.jpg">
-              </picture>
-              <strong class="item_title">sphynx</strong>
-            </div>
-            <div class="item">
-              <picture class="item_picture">
-                <img class="item_image" src="images/siam.jpg">
-              </picture>
-              <strong class="item_title">siam</strong>
-            </div>
-            <div class="item">
-              <picture class="item_picture">
-                <img class="item_image" src="images/persian.jpg">
-              </picture>
-              <strong class="item_title">persian</strong>
-            </div>
-          </div>
-            <div class="compared_values">
-              <div class="values_group">
-                <div class="values_title">+ athletic abilities</div>
-                <table>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                  </tr>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                </table>
-              </div>
-              <div class="values_group">
-                <div class="values_title">+ athletic abilities</div>
-                <table>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                  </tr>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                </table>
-              </div>
-              <div class="values_group">
-                <div class="values_title">+ athletic abilities</div>
-                <table>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                  </tr>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                </table>
-              </div>
-              <div class="values_group">
-                <div class="values_title">+ athletic abilities</div>
-                <table>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                  </tr>
-                  <tr>
-                    <th colspan="42">average speed</th>
-                  </tr>
-                  <tr>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                    <td>3.7 m/s</td>
-                </table>
-              </div>
-            </div>
-          </div>
-        <div class="menu_items">
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat2.jpg">
-            </picture>
-            <div class="menu_item_name">munchkin</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat3.jpg">
-            </picture>
-            <div class="menu_item_name">>:(</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat4.jpg">
-            </picture>
-            <div class="menu_item_name">:|</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat1.jpg">
-            </picture>
-            <div class="menu_item_name">-__-</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat2.jpg">
-            </picture>
-            <div class="menu_item_name">munchkin</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat3.jpg">
-            </picture>
-            <div class="menu_item_name">>:(</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat4.jpg">
-            </picture>
-            <div class="menu_item_name">:|</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat1.jpg">
-            </picture>
-            <div class="menu_item_name">-__-</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat2.jpg">
-            </picture>
-            <div class="menu_item_name">munchkin</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat3.jpg">
-            </picture>
-            <div class="menu_item_name">>:(</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat4.jpg">
-            </picture>
-            <div class="menu_item_name">:|</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat1.jpg">
-            </picture>
-            <div class="menu_item_name">-__-</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat2.jpg">
-            </picture>
-            <div class="menu_item_name">munchkin</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat3.jpg">
-            </picture>
-            <div class="menu_item_name">>:(</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat4.jpg">
-            </picture>
-            <div class="menu_item_name">:|</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat1.jpg">
-            </picture>
-            <div class="menu_item_name">-__-</div>
-          </div>
-          <div class="menu_item">
-            <picture>
-              <img class="menu_image" src="images/single_cat2.jpg">
-            </picture>
-            <div class="menu_item_name">munchkin</div>
+          <div id="compared_items_output" class="compared_items"></div>
+          <div class="compared_values">
+            <div id="values_group_output" class="values_group"></div>
           </div>
         </div>
+        <div id="menu_items_output" class="menu_items"></div>
       </div>
     </main>
 

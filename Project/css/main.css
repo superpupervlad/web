@@ -12,7 +12,6 @@ body {
   margin: 0;
 }
 header {
-  position: sticky;
   top: 0;
   height: 80px;
   background: #fff;
@@ -69,6 +68,8 @@ th {
 }
 table {
   margin-bottom: 15px;
+  table-layout: fixed;
+  width: 100%;
 }
 .stroked-function {
   border: 3px dashed #84b6e8;
@@ -97,6 +98,8 @@ table {
 .item {
   flex-direction: column;
   flex-basis: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .item_picture {
   margin: 5px auto 0 auto;
@@ -110,9 +113,9 @@ table {
   width: 40%;
 }
 .item_title {
-  font-size: 3em;
+  font-size: 2em;
 }
-.comapare_section_block {
+.compare_section_block {
   justify-content: space-between;
   margin: 30px;
 }
@@ -126,7 +129,6 @@ table {
   align-items: stretch;
   border-radius: 0;
   z-index: 50;
-  position: sticky;
   background: #fff;
   top: 80px;
   justify-content: space-between;
@@ -136,7 +138,6 @@ table {
   justify-content: center;
   flex-direction: column;
   margin-top: 40px;
-  position: sticky;
   top: 400px;
 }
 .values_group {
@@ -148,13 +149,28 @@ table {
 .values_group:first-child {
   border-top: 0;
 }
-.values_title {
-  position: sticky;
+.values_subgroup_title {
   font-size: 3em;
   border-bottom: 1px solid #000;
   border-radius: 0;
   background: #fff;
   top: 250px;
+}
+.values_subgroup {
+  flex-direction: column;
+}
+.values_title_values {
+  flex-direction: column;
+}
+.values_title {
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.values_values {
+  justify-content: space-around;
+  margin-bottom: 5px;
 }
 .menu_items {
   flex-shrink: 2;
@@ -163,7 +179,9 @@ table {
   top: 80px;
   flex-direction: column;
   overflow-y: scroll;
-  height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
+  min-height: 70px;
+  min-width: 200px;
 }
 .menu_item {
   justify-content: flex-start;

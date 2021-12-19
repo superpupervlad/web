@@ -1,0 +1,17 @@
+{
+    "name": ":|",
+    "img": "single_cat4.jpg",
+    "id": 3,
+    "data": {
+        "athletic abilities1": {
+            "average_speed11": "11 m/s",
+            "average_speed12": "12 m/s",
+            "average_speed13": "13 m/s"
+        },
+        "athletic abilities2": {
+            "average_speed21": "21 m/s",
+            "average_speed22": "22 m/s",
+            "average_speed23": "23 m/s"
+        }
+    }
+}
