@@ -12,7 +12,6 @@ header
   top 0
   height 80px
   background white
-  z-index 100
 
 header a
   text-decoration none
@@ -126,7 +125,6 @@ table
   max-height 200px
   align-items stretch
   border-radius 0
-  z-index 50
   background white
   top 80px
   justify-content space-between
@@ -222,3 +220,16 @@ div.about_text p
 @media screen and (min-width: 1600px)
   header input
     width 250px
+
+.hidden {
+  display: none;
+}
+
+.loading {
+  animation: spin 2s ease infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

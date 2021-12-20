@@ -1,11 +1,3 @@
-function append_elements(ids) {
-    ids.forEach(async id => {
-        await add_to_columns(id)
-        hide_from_menu(id)
-        render_all()
-    })
-}
-
 async function add_to_columns(id) {
     columns.push(await get_info(id));
 }
@@ -20,10 +12,12 @@ function hide_from_menu(id) {
 }
 
 async function append_element(id) {
+    document.querySelector("#loader").classList.add("loading")
     await add_to_columns(id)
     hide_from_menu(id)
     process_checkbox()
     render_all()
+    document.querySelector("#loader").classList.remove("loading")
 }
 
 function delete_element(id) {
