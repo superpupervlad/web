@@ -33,15 +33,15 @@ header input
   width 16%
   height 40px
   font-size 1.5em
-  font-family 'Roboto'
+  font-family 'Roboto', sans-serif
   font-weight 300
   @extend .default_stroke
 
 h1
   display block
   font-size 5em
-  margin-top 20px
-  margin-bottom 100px
+  margin-top 10px
+  margin-bottom 60px
   text-align center
   font-weight 100
 
@@ -114,7 +114,7 @@ table
   font-size 2em
 
 .compare_section_block
-  justify-content space-between
+  justify-content center
   margin 30px
 
 .compare_items_block
@@ -152,8 +152,9 @@ table
   font-size 3em
   border-bottom 1px solid black
   border-radius 0
+  padding-left 5px
+  margin-top 10px
   background white
-  top 250px
 
 .values_subgroup
   flex-direction column
@@ -176,12 +177,13 @@ table
   flex-shrink 2
   position sticky
   align-self flex-start
-  top 80px
+  top 20px
   flex-direction column
   overflow-y scroll
-  max-height calc(100vh - 80px)
+  max-height calc(100vh - 40px)
   min-height 70px
   min-width 200px
+  width 25vw
   @extend .default_stroke
 
 .menu_item
@@ -204,6 +206,14 @@ table
   display block
   margin auto 40px auto 40px //TODO respect scrollbar
   flex-basis 100%
+
+.about_text
+  margin 300px auto
+  width 60%
+  @extend .default_stroke
+
+div.about_text p
+  margin 10px
 
 @media screen and (max-width: 900px)
   header input

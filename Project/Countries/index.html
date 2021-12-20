@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/change_elements.js"></script>
     <script type="text/javascript" src="js/load.js"></script>
     <script type="text/javascript" src="js/other.js"></script>
+    <link rel="shortcut icon" href="images/header.png" type="image/png">
     <title>Countries</title>
     <!--Google fonts-->
     <style>
@@ -53,7 +54,7 @@
     <!--Handlebars templates-->
     <script id="values_group_template" type="text/x-handlebars-template">
         {{#each as as |subgroup|}}
-          <div class="values_subgroup_title">+ {{subgroup}}</div>
+          <div class="values_subgroup_title">{{subgroup}}</div>
           <div class="values_subgroup">
             <div class="values_title_values">
               {{#each (lookup ../av subgroup) as |value_title|}}
